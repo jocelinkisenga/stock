@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Rapport;
 
+use App\Http\Repositorie\StockRepositorie;
 use App\Models\HystoryProduct;
 use App\Models\Produit;
 use Illuminate\Support\Facades\DB;
@@ -18,10 +19,9 @@ class Stockrapport extends Component
     }
 
     public function search(){
-       
-      $result = Db::table('hystory_products')->select()->where("CAST(created_at AS DATE)",">=",$this->date_from)
-        ->where("CAST(created_at AS DATE)","<=",$this->date_to)->get();
-       
+      $stock = new StockRepositorie;
+     // $result = Db::select("SELECT DATE(created_at)   FROM hystory_products WHERE DATE(created_at) >= '.$this->date_from.' AND  DATE(created_at) <= '.$this->date_to.' " );
+       $result = $stock->stock($this->date_from, $this->date_to);
         return dd($result);
     }
 
