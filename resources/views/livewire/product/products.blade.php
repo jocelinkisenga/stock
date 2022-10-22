@@ -17,7 +17,7 @@
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Ajouter un produit</h5>
+                                        <h5 class="modal-title" id="exampleModalLabel">Ajouter la quantité</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
@@ -26,7 +26,7 @@
                                         <form action="">
                                             <div class="form-group">
                                                 <label for="">selectionner un produit :</label>
-                                                <select class="form-control" wire:model="categorie_id" id="">
+                                                <select class="form-control" wire:model="produit_id" id="">
                                                     <option selected>selectionner une produit</option>
                                                     @foreach ($data as $item)
                                                         <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -36,19 +36,19 @@
 
                                             <div class="form-group">
                                                 <label for="recipient-name" class="col-form-label">prix d'achat:</label>
-                                                <input type="text" wire:model="name" class="form-control"
+                                                <input type="text" wire:model="prix_achat" class="form-control"
                                                     id="recipient-name">
                                             </div>
                                             <div class="form-group">
                                                 <label for="recipient-name" class="col-form-label">quantité :</label>
-                                                <input type="number" wire:model="price" class="form-control"
+                                                <input type="number" wire:model="produit_quantity" class="form-control"
                                                     id="recipient-name">
                                             </div>
 
 
                                             <div class="modal-footer">
                                                 <button type="submit" class="btn btn-primary"
-                                                    wire:click.prevent="store()">créer</button>
+                                                    wire:click.prevent="ajouter()">créer</button>
                                             </div>
                                         </form>
                                     </div>
@@ -77,7 +77,7 @@
                                             <div class="form-group">
                                                 <label for="recipient-name" class="col-form-label">prix de
                                                     vente:</label>
-                                                <input type="text" wire:model="name" class="form-control"
+                                                <input type="text" wire:model="price" class="form-control"
                                                     id="recipient-name">
                                             </div>
 
@@ -122,15 +122,14 @@
                                         <table class="table table-bordered" id="myTable">
                                             <thead class="uppercase">
                                                 <tr class="uppercase table-info ">
-
+                                                    <th> 
+                                                        #
+                                                    </th>
                                                     <th class="">
                                                         nom
                                                     </th>
                                                     <th>
                                                         quantité
-                                                    </th>
-                                                    <th>
-                                                        prix d'achat
                                                     </th>
 
                                                     <th>
@@ -142,8 +141,9 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($data as $produit)
+                                                @foreach ($data as $key => $produit)
                                                     <tr>
+                                                        <td>{{$key+1}}</td>
                                                         <td>
                                                             {{ $produit->name }}
                                                         </td>
@@ -154,9 +154,7 @@
                                                             {{ $produit->price }} fc
                                                         </td>
 
-                                                        <td>
-                                                            vnvi
-                                                        </td>
+
                                                         <td>
                                                             <form wire:ignore.self>
                                                                 <input type="number" wire:model="product_price"

@@ -13,6 +13,6 @@ class HomeController extends Controller
     }
 
     public function facture(){
-        
+        return view('Pages.facture');
     }
 }

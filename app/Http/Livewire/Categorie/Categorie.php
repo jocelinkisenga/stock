@@ -29,4 +29,14 @@ class Categorie extends Component
             $this->reset_fields();
             $this->emit('categorieStore');
     }
+
+    public function modifier ($id){
+        $categorie = ModelsCategorie::find($id);
+        $categorie->update([
+            "name"=>$this->name
+        ]);
+
+        session()->flash('message','categorie modifier avec succès');
+
+    }
 }
