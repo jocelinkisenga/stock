@@ -31,4 +31,13 @@ class Precommande extends Component
         session()->flash('message','commande crée avec succès');
 
     }
+
+    public function confirmer(int $id){
+        $precommande = ModelsPrecommande::find($id);
+        $precommande->update([
+            'status'=>true
+        ]);
+
+        session()->flash('message','commande confirmer avec succès');
+    }
 }

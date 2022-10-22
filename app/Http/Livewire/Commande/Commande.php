@@ -13,37 +13,38 @@ class Commande extends Component
 
 
 
-    private function reset_fields(){
+    private function reset_fields()
+    {
         $this->quantity_commande;
     }
 
-    public function ajouter($produitId, $commandeId){
+    public function ajouter($produitId, $commandeId)
+    {
         $commande = new  CommandeRepositorie;
         $this->precommande_id = $commandeId;
         $this->produit_id = $produitId;
 
-    $produit = $commande->produit_by_id($this->produit_id);
-        
-        if($produit){
-          
-            $comm =  $commande->commande_by_id($this->precommande_id,$this->produit_id);
-         
-                if($comm->isEmpty()){
-             
-                    $commande->store_command($this->precommande_id, $this->produit_id, $this->quantity_commande);
-                    //     ModelsCommande::create([
-                    //         "precomande_id"=>$this->precommande_id,
-                    //         "produit_id"=>$this->produit_id,
-                    //         "quantity_commande"=>$this->quantity_commande
-                    // ]);
-                
-                 } else {
-               
-                  $commande->update_quantity($this->precommande_id, $this->produit_id, $this->quantity_commande);  
-                }
+        $produit = $commande->produit_by_id($this->produit_id);
+
+        if ($produit) {
+
+            $comm =  $commande->commande_by_id($this->precommande_id, $this->produit_id);
+
+            if ($comm->isEmpty()) {
+
+                $commande->store_command($this->precommande_id, $this->produit_id, $this->quantity_commande);
+            } else {
+
+                $commande->update_quantity($this->precommande_id, $this->produit_id, $this->quantity_commande);
+            }
         }
+    }
 
-
+    public function reduire($commandId, $produitId)
+    {
+        $commande = new  CommandeRepositorie;
+       $result =  $commande->reduire_quantity($commandId, $produitId);
+       dd($result);
     }
 
     public function render()

@@ -315,5 +315,13 @@
           <span class="menu-title">rapports</span> 
         </a> 
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{route('users')}}"  >
+          <i class="icon-layout menu-icon"></i>
+          <span class="menu-title">personnel</span> 
+        </a> 
+      </li>
+
+
     </ul>
   </nav>

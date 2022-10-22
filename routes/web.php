@@ -9,8 +9,11 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PrecommandeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RapportController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\ServerController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\TableController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,8 +54,11 @@ Route::middleware('auth')->group(function(){
     Route::get('/dailyStock',[StockController::class,'daily'])->name("daily-stock");
     Route::get('/weeklyStock',[StockController::class,'weekly'])->name("weekly-stock");
     Route::get('/monthStock',[StockController::class,'monthly'])->name("monthly-stock");
-
+    
     Route::get('/facture/{id}',[HomeController::class,'facture'])->name('facture');
+
+    Route::get('/roles',[RoleController::class,'index'])->name('roles');
+    Route::get('/users',[UserController::class,'index'])->name('users');
 });
 
 require __DIR__.'/auth.php';

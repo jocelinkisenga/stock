@@ -88,7 +88,11 @@
                                                         <td><a href="{{ route('facture', ['id' => $item->id]) }}"
                                                                 class="btn btn-primary btn-sm"> générer la facture</a>
                                                         </td>
-                                                        <td> </td>
+                                                        <td>
+                                                            <form >
+                                                                <input type="submit" value="confirmer" wire:click.prevent="confirmer({{$item->id}})" class="btn btn-danger btn-sm">
+                                                            </form>
+                                                         </td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>
