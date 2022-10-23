@@ -49,6 +49,15 @@ class Commande extends Component
       
     }
 
+    public function annuler($commandId, $produitId,$quantity)
+    {
+       
+        $commande = new  CommandeRepositorie;
+       $result =  $commande->delete_commande($commandId, $produitId,$quantity);
+     
+      
+    }
+
     public function render()
     {
         $commande = new  CommandeRepositorie;

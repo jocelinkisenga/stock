@@ -83,7 +83,7 @@
 
                                                     <input type="submit" value="Annuler "
                                                         class="btn btn-danger btn-sm"
-                                                        wire:click.prevent="annuler({{ $commande_id }},{{ $item->pId }})" />
+                                                        wire:click.prevent="annuler({{ $commande_id }},{{ $item->pId }}, {{ $item->quantity_commande }})" />
                                                 </form>
                                             </td>
 

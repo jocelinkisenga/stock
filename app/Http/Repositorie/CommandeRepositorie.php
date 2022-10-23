@@ -77,10 +77,34 @@ class CommandeRepositorie
                 $result =  Commande::where('precomande_id', '=', $commandId)->where('produit_id', '=', $produitId)->first();
                 if (!empty($result)) {
                         $new_qty = $result->quantity_commande - 1;
-                  
+                        $this->restore_product($produitId,1);
                         $result->update([
                                 'quantity_commande' => $new_qty
                         ]);
+                }
+        }
+
+
+        public function delete_commande(int $commandId, int $produitId,$qty)
+        {
+                $result =  Commande::where('precomande_id', '=', $commandId)->where('produit_id', '=', $produitId)->first();
+                if (!empty($result)) {
+                        $this->restore_product($produitId,$qty);
+                        $result->delete();
+                }
+        }
+
+        public function  restore_product($productId, $quantity){
+                $result =  Produit::where('id', '=', $productId)->first();
+                if (!empty($result)) {
+                        $qty = $result->quantity;
+                        if ($qty >= $quantity) {
+                                $new_qty = $qty + $quantity;
+
+                                $result->update([
+                                        "quantity" => $new_qty
+                                ]);
+                        }
                 }
         }
 }
