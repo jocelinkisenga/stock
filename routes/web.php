@@ -50,6 +50,7 @@ Route::middleware('auth')->group(function(){
     Route::get("/dailyRapport",[RapportController::class,'daily'])->name('daily-rapport');
     Route::get("/weeklyRapport",[RapportController::class,'monthly'])->name('weekly-rapport');
     Route::get("/monthlyRapport",[RapportController::class,'monthly'])->name('monthly-rapport');
+    Route::post("/search",[RapportController::class,'search'])->name('search');
 
     Route::get('/dailyStock',[StockController::class,'daily'])->name("daily-stock");
     Route::get('/weeklyStock',[StockController::class,'weekly'])->name("weekly-stock");

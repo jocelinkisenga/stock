@@ -25,7 +25,7 @@
                                             <tr>
                                                 <td>{{ $item->name }}</td>
                                                 <td>{{ $item->price }}</td>
-                                                <td> <input type="number" wire:focusin=""
+                                                <td> <input type="number" wire:focusin="" autocomplete="off"
                                                         wire:model="quantity_commande" />
                                                     <input type="submit" value="ajouter"
                                                         wire:click.prevent="ajouter({{ $item->id }},{{ $commande_id }})"
@@ -60,29 +60,34 @@
                                 <tbody>
 
                                     @foreach ($commandes as $item)
+                                        <tr>
 
-                                            <tr>
+                                            <td>
+                                                {{ $item->name }}
 
-                                                <td>
-                                                    {{ $item->name }}
+                                            </td>
+                                            <td>
+                                                {{ $item->quantity_commande }}
+                                            </td>
+                                            <td class="text-white">
+                                                <form>
 
-                                                </td>
-                                                <td>
-                                                    {{ $item->quantity_commande }}
-                                                </td>
-                                                <td class="text-white">
-                                                    <form>
-                                                        
-                                                        <input type="submit" value="reduire "
-                                                        class="btn btn-warning btn-sm" wire:click.prevent="reduire({{ $commande_id }},{{ $item->id }})" />
-                                                    </form>
-                                                    
-                                                    </td>
-                                                <td class="text-danger"><input type="submit" value="Annuler tout "
-                                                        class="btn btn-danger btn-sm" /></td>
+                                                    <input type="submit" value="reduire "
+                                                        class="btn btn-warning btn-sm"
+                                                        wire:click.prevent="reduire({{ $commande_id }},{{ $item->pId }})" />
+                                                </form>
 
-                                            </tr>
-                                        
+                                            </td>
+                                            <td class="text-danger">
+                                                <form>
+
+                                                    <input type="submit" value="Annuler "
+                                                        class="btn btn-danger btn-sm"
+                                                        wire:click.prevent="annuler({{ $commande_id }},{{ $item->pId }})" />
+                                                </form>
+                                            </td>
+
+                                        </tr>
                                     @endforeach
 
 

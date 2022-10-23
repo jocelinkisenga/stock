@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Repositorie\StockRepositorie;
 use Illuminate\Http\Request;
 
 class RapportController extends Controller
 {
     public function index(){
-        return view("pages.rapports");
+
+        $data = [];
+
+        return view("pages.rapports",compact('data'));
     }
 
     public function daily(){
@@ -20,6 +24,13 @@ class RapportController extends Controller
 
     public function monthly(){
         return view("pages.rapport.monthlyRapport");
+    }
+
+    public function search(Request $request){
+        $stock = new StockRepositorie;
+        $data = $stock->stock($request->date_from, $request->date_to);
+        return view("pages.rapports",compact('data'));
+
     }
 
 

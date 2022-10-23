@@ -8,7 +8,7 @@
                     <div class="card-body">
                         <h4 class="card-title"></h4>
                         <p class="card-description">
-                            <button type="button" class="btn btn-success" data-toggle="modal"
+                            <button type="button" class="btn btn-success text-uppercase" data-toggle="modal"
                                 data-target="#exampleModal" data-whatever="@mdo">Ajouter une categorie</button>
 
                         <div wire:ignore.self class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
@@ -56,7 +56,7 @@
                                     <div class="table-responsive pt-3">
                                         <table class="table table-bordered rounded-sm" id="myTable">
                                             <thead>
-                                                <tr class="table-success">
+                                                <tr class="table-success text-uppercase">
                                                     <th>
                                                         #
                                                     </th>
@@ -71,10 +71,9 @@
                                             </thead>
                                             <tbody>
                                                 @foreach ($data as $key => $item)
-                                                
                                                     <tr>
                                                         <td>
-                                                          {{$key+1}}
+                                                            {{ $key + 1 }}
                                                         </td>
                                                         <td>
                                                             {{ $item->name }}
@@ -106,7 +105,8 @@
                                                                                     <input type="text"
                                                                                         wire:model="name"
                                                                                         class="form-control"
-                                                                                        id="recipient-name" value="{{$item->name}}">
+                                                                                        id="recipient-name"
+                                                                                        value="{{ $item->name }}">
                                                                                 </div>
                                                                                 @error('name')
                                                                                     <span
@@ -115,7 +115,7 @@
                                                                                 <div class="modal-footer">
                                                                                     <button type="submit"
                                                                                         class="btn btn-primary"
-                                                                                        wire:click.prevent="modifier({{$item->id}})">modifier</button>
+                                                                                        wire:click.prevent="modifier({{ $item->id }})">modifier</button>
                                                                                 </div>
                                                                             </form>
                                                                         </div>

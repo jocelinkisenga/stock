@@ -8,7 +8,7 @@
                     <div class="card-body">
                         <h4 class="card-title"></h4>
                         <p class="card-description">
-                            <button type="button" class="btn btn-success" data-toggle="modal"
+                            <button type="button" class="btn btn-success text-uppercase" data-toggle="modal"
                                 data-target="#exampleModal" data-whatever="@mdo">créer une commande</button>
 
                         <div wire:ignore.self class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
@@ -28,6 +28,15 @@
                                                 <select class="form-control" wire:model="table_id" id="">
                                                     <option selected>selectionner une table</option>
                                                     @foreach ($tables as $item)
+                                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="">selectionner un serveur :</label>
+                                                <select class="form-control" wire:model="user_id" id="">
+                                                    <option selected>selectionner un serveur</option>
+                                                    @foreach ($serveurs as $item)
                                                         <option value="{{ $item->id }}">{{ $item->name }}</option>
                                                     @endforeach
                                                 </select>
@@ -57,10 +66,13 @@
                                     <div class="table-responsive pt-3">
                                         <table class="table table-bordered" id="myTable">
                                             <thead>
-                                                <tr class="table-info">
+                                                <tr class="table-info text-uppercase">
                                                     <th>#</th>
                                                     <th>
                                                         table
+                                                    </th>
+                                                    <th>
+                                                        serveur
                                                     </th>
                                                     <th>
                                                         commander
@@ -83,16 +95,19 @@
                                                             {{ $key + 1 }}
                                                         </td>
                                                         <td>{{ $item->name }}</td>
+                                                        <td>{{ $item->user }}</td>
                                                         <td><a href="{{ route('new_commande', ['id' => $item->id]) }}"
                                                                 class="btn btn-primary btn-sm"> commander</a> </td>
                                                         <td><a href="{{ route('facture', ['id' => $item->id]) }}"
                                                                 class="btn btn-primary btn-sm"> générer la facture</a>
                                                         </td>
                                                         <td>
-                                                            <form >
-                                                                <input type="submit" value="confirmer" wire:click.prevent="confirmer({{$item->id}})" class="btn btn-danger btn-sm">
+                                                            <form>
+                                                                <input type="submit" value="confirmer"
+                                                                    wire:click.prevent="confirmer({{ $item->id }})"
+                                                                    class="btn btn-danger btn-sm">
                                                             </form>
-                                                         </td>
+                                                        </td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>

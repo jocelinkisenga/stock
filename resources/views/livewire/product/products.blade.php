@@ -8,9 +8,9 @@
                     <div class="card-body">
                         <h4 class="card-title"></h4>
                         <p class="card-description">
-                            <button type="button" class="btn btn-success" data-toggle="modal"
+                            <button type="button" class="btn btn-success text-uppercase" data-toggle="modal"
                                 data-target="#createProduct" data-whatever="@mdo">Créer un produit</button>
-                            <button type="button" class="ml-7 btn btn-primary" data-toggle="modal"
+                            <button type="button" class="ml-7 btn btn-primary text-uppercase ml-4 " data-toggle="modal"
                                 data-target="#exampleModal" data-whatever="@mdo">Ajouter la quantité</button>
                         <div wire:ignore.self class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
                             aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -121,8 +121,8 @@
                                     <div class="pt-3 table-responsive">
                                         <table class="table table-bordered" id="myTable">
                                             <thead class="uppercase">
-                                                <tr class="uppercase table-info ">
-                                                    <th> 
+                                                <tr class="text-uppercase table-info ">
+                                                    <th>
                                                         #
                                                     </th>
                                                     <th class="">
@@ -133,7 +133,7 @@
                                                     </th>
 
                                                     <th>
-                                                      prix de vente
+                                                        prix de vente
                                                     </th>
                                                     <th>
                                                         modifier le prix
@@ -143,7 +143,7 @@
                                             <tbody>
                                                 @foreach ($data as $key => $produit)
                                                     <tr>
-                                                        <td>{{$key+1}}</td>
+                                                        <td>{{ $key + 1 }}</td>
                                                         <td>
                                                             {{ $produit->name }}
                                                         </td>

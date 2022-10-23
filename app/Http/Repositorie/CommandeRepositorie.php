@@ -53,7 +53,7 @@ class CommandeRepositorie
 
         public function commande_by_product($commandId)
         {
-                $result =  Commande::where('precomande_id', '=', $commandId)->join('produits', 'commandes.produit_id', '=', 'produits.id')->get(['commandes.*', 'produits.name']);
+                $result =  Commande::where('precomande_id', '=', $commandId)->join('produits', 'commandes.produit_id', '=', 'produits.id')->get(['commandes.*', 'produits.name','produits.id as pId']);
                 return $result;
         }
 
@@ -76,11 +76,11 @@ class CommandeRepositorie
         {
                 $result =  Commande::where('precomande_id', '=', $commandId)->where('produit_id', '=', $produitId)->first();
                 if (!empty($result)) {
-                        $new_qty = $result->quantity_commande;
-                        return $result;
-                        // $result->update([
-                        //         'quantity_commande' => $new_qty
-                        // ]);
+                        $new_qty = $result->quantity_commande - 1;
+                  
+                        $result->update([
+                                'quantity_commande' => $new_qty
+                        ]);
                 }
         }
 }

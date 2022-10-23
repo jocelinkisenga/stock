@@ -10,20 +10,23 @@ use Livewire\Component;
 
 class Stockrapport extends Component
 {
-    public $data, $date_from, $date_to;
+    public $data, $date_from, $date_to, $from, $to;
+
+    public function search(){
+     
+     
+       
+    }
+
     public function render()
     {
-      //  $this->data =$this->search();
-         
+        
+        $stock = new StockRepositorie;
+        $this->data = $stock->stock($this->date_from, $this->date_to);
+
         return view('livewire.rapport.stockrapport');
     }
 
-    public function search(){
-      $stock = new StockRepositorie;
-     // $result = Db::select("SELECT DATE(created_at)   FROM hystory_products WHERE DATE(created_at) >= '.$this->date_from.' AND  DATE(created_at) <= '.$this->date_to.' " );
-       $result = $stock->stock($this->date_from, $this->date_to);
-        return dd($result);
-    }
 
 }
     

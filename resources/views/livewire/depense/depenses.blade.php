@@ -8,7 +8,7 @@
                     <div class="card-body">
                         <h4 class="card-title"></h4>
                         <p class="card-description">
-                            <button type="button" class="btn btn-success" data-toggle="modal"
+                            <button type="button" class="btn btn-success text-uppercase" data-toggle="modal"
                                 data-target="#exampleModal" data-whatever="@mdo">Ajouter une table</button>
 
                         <div wire:ignore.self class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
@@ -72,9 +72,9 @@
                                     <div class="pt-3 table-responsive">
                                         <table class="table table-bordered" id="myTable">
                                             <thead>
-                                                <tr class="table-info">
+                                                <tr class="table-info text-uppercase">
                                                     <th>
-                                                      #
+                                                        #
                                                     </th>
                                                     <th>
                                                         béneficiare
@@ -92,9 +92,9 @@
                                             <tbody>
                                                 @foreach ($depenses as $key => $item)
                                                     <tr>
-                                                      <td>
-                                                        {{$key+1}}
-                                                      </td>
+                                                        <td>
+                                                            {{ $key + 1 }}
+                                                        </td>
                                                         <td>
                                                             {{ $item->user_name }}
                                                         </td>

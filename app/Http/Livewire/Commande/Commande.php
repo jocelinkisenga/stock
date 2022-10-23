@@ -42,9 +42,11 @@ class Commande extends Component
 
     public function reduire($commandId, $produitId)
     {
+       
         $commande = new  CommandeRepositorie;
        $result =  $commande->reduire_quantity($commandId, $produitId);
-       dd($result);
+     
+      
     }
 
     public function render()

@@ -9,4 +9,8 @@ class Produit extends Model
 {
     use HasFactory;
     protected $fillable = ['categorie_id','name','price','quantity'];
+
+    public function hystories(){
+        return $this->hasMany(HystoryProduct::class);
+    }
 }

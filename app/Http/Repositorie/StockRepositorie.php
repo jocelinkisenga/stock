@@ -2,28 +2,28 @@
 
 namespace App\Http\Repositorie;
 
+use App\Models\HystoryProduct;
 use Illuminate\Support\Facades\DB;
 
 class StockRepositorie {
 
     public function stock($from, $to){
-     $result =   DB::select("SELECT  produits.id, produits.name,
-     (SELECT SUM(hystory_products.new_quantity) AS entries
-         FROM hystory_products 
-         WHERE hystory_products.product_id = produits.id 
-         AND DATE(hystory_products.created_at) >= $from AND DATE(hystory_products.created_at) <= $to ) 
-     AS entries,
-     (SELECT SUM(commandes.quantity_commande) 
-         FROM commandes 
-          WHERE commandes.produit_id = produits.id 
-         AND DATE(commandes.created_at) >= $from AND DATE(commandes.created_at) <= $to) 
-     AS outputs
- FROM produits,commandes,hystory_products 
- WHERE hystory_products.product_id = produits.id
- AND commandes.produit_id = produits.id
- AND DATE(commandes.created_at) >= $from AND DATE(commandes.created_at) <= $to
- AND DATE(hystory_products.created_at) >= $from AND DATE(hystory_products.created_at) <= $to
- GROUP BY produits.name");
+        DB::statement("SET SQL_MODE=''");
+     $result =   DB::select("SELECT produits.name,DATE(hystory_products.created_at), 
+                                    hystory_products.prix_achat as achat, produits.price as vente, 
+                                    (SELECT SUM(new_quantity) 
+                                        FROM hystory_products 
+                                        WHERE hystory_products.product_id = produits.id 
+                                        AND DATE(hystory_products.created_at) >= '$from'AND DATE(hystory_products.created_at) <= '$to') as entries,
+                                        (SELECT SUM(old_quantity) 
+                                        FROM hystory_products 
+                                        WHERE hystory_products.product_id = produits.id 
+                                        AND DATE(hystory_products.created_at) >= '$from'AND DATE(hystory_products.created_at) <= '$to') as solde,
+                                     (SELECT SUM(commandes.quantity_commande)
+                                         FROM commandes
+                                          WHERE commandes.produit_id = produits.id
+                                          AND DATE(commandes.created_at) >= '$from'AND DATE(commandes.created_at) <= '$to') as outputs 
+                                FROM hystory_products, produits,commandes WHERE DATE(hystory_products.created_at) >= '$from' AND DATE(hystory_products.created_at) <= '$to' GROUP BY (produits.name)");
 
 
 // $result = "SELECT produit.nom,
@@ -49,6 +49,9 @@ class StockRepositorie {
 // ->join('commandes', 'produits.id', '=', 'commandes.produit_id')
 // ->select('produits.name', 'hystory_products.new_quantity', 'produits.quantity','commandes.quantity_commande')
 // ->where("CAST(commandes.created_at AS DATE","=", "CURRENT_DATE")->get();
+
+
+//$result = HystoryProduct::with('produit')->groupBy("hystory_products.product_id")->get();
 return $result;
     }
 } 

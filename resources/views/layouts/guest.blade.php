@@ -11,14 +11,12 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
         <!-- Scripts -->
-        <link rel="stylesheet" href="{{asset('vendors/feather/feather.css')}}">
-        <link rel="stylesheet" href="{{asset('vendors/ti-icons/css/themify-icons.css')}}">
-        <link rel="stylesheet" href="{{asset('vendors/css/vendor.bundle.base.css')}}">
+        <link rel="stylesheet" href="{{asset('feather/feather.css')}}">
+        <link rel="stylesheet" href="{{asset('ti-icons/css/themify-icons.css')}}">
+        <link rel="stylesheet" href="{{asset('css/vendor.bundle.base.css')}}">
+      
       
         <script src="{{asset('assets/js/jquery.js')}}"></script>
-          <script src="/public/assets/js/html2pdf.bundle.min.js"></script>
-          <script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
-          <script src="https://printjs-4de6.kxcdn.com/print.min.css"></script>
         
         <!-- endinject -->
         <!-- Plugin css for this page -->
@@ -31,8 +29,8 @@
 
 @yield('content')
 
- <script src="{{asset('vendors/js/vendor.bundle.base.js')}}"></script>
-<script src="{{asset('vendors/js/vendor.bundle.base.js')}}"></script>
+ <script src="{{asset('js/vendor.bundle.base.js')}}"></script>
+
   <!-- endinject -->
 
   <!-- endinject -->
