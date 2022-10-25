@@ -9,7 +9,7 @@
                             onkeyup="myFunction()" placeholder="Search for names..">
                         <p class="card-description">
                             @if (session('message'))
-                            <p class="text-danger">{{session('message')}}</p>
+                            <p class="alert alert-danger">{{session('message')}}</p>
                         @endif
                         </p>
                         <div class="table-responsive">
