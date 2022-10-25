@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Produit;
 use App\Utilities\FormatDate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -9,8 +10,8 @@ use Illuminate\Support\Facades\DB;
 class HomeController extends Controller
 {
     public function index(){
-  
-        return view('Pages.index');
+        $produits = Produit::all();
+        return view('Pages.index',compact("produits"));
     }
 
     public function facture($commandId){

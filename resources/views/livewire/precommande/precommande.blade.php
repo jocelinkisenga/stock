@@ -63,7 +63,7 @@
                                     @endif
                                     <p class="card-description">
                                     </p>
-                                    <div class="table-responsive pt-3">
+                                    <div class="pt-3 table-responsive">
                                         <table class="table table-bordered" id="myTable">
                                             <thead>
                                                 <tr class="table-info text-uppercase">
@@ -99,7 +99,7 @@
                                                         <td><a href="{{ route('new_commande', ['id' => $item->id]) }}"
                                                                 class="btn btn-primary btn-sm"> commander</a> </td>
                                                         <td><a href="{{ route('facture', ['id' => $item->id]) }}"
-                                                                class="btn btn-primary btn-sm"> générer la facture</a>
+                                                                class="btn btn-success btn-sm"> générer la facture</a>
                                                         </td>
                                                         <td>
                                                             <form>

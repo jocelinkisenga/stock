@@ -10,8 +10,10 @@ class RapportController extends Controller
     public function index(){
 
         $data = [];
+        $from = "";
+        $to = "";
 
-        return view("pages.rapports",compact('data'));
+        return view("pages.rapports",compact('data','from','to'));
     }
 
     public function daily(){
@@ -29,7 +31,9 @@ class RapportController extends Controller
     public function search(Request $request){
         $stock = new StockRepositorie;
         $data = $stock->stock($request->date_from, $request->date_to);
-        return view("pages.rapports",compact('data'));
+        $from = $request->from;
+        $to = $request->to;
+        return view("pages.rapports",compact('data','from','to'));
 
     }
 

@@ -15,6 +15,7 @@ class Products extends Component
     {
         $this->categories = Categorie::all();
         $this->data = Produit::all();
+        
         return view('livewire.product.products');
     }
 
@@ -43,27 +44,6 @@ class Products extends Component
         session()->flash('message', 'produit ajouté avec succès');
     }
 
-    public function ajouter()
-    {
-
-        $produit = Produit::find($this->produit_id);
-        $old_quantity = $produit->quantity;
-
-        $history =  HystoryProduct::create([
-            'product_id' => $this->produit_id,
-            'new_quantity' => $this->produit_quantity,
-            'old_quantity' => $old_quantity,
-            'prix_achat' => $this->prix_achat
-        ]);
-        if ($history) {
-            $updated_quantity = $old_quantity + $this->produit_quantity;
-            $produit->update([
-                'quantity' => $updated_quantity
-            ]);
-            $this->reset_fields();
-            session()->flash('message', 'quantite ajouté');
-        }
-    }
 
     public function modifier_prix($produitId)
     {

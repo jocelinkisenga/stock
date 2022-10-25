@@ -13,4 +13,8 @@ class Produit extends Model
     public function hystories(){
         return $this->hasMany(HystoryProduct::class);
     }
+
+    public function categorie(){
+        return $this->belongsTo(Categorie::class);
+    }
 }

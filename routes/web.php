@@ -13,6 +13,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ServerController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\TableController;
+use App\Http\Controllers\TauxController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -39,12 +40,21 @@ Route::get('/', [AuthenticatedSessionController::class, 'create'])->middleware('
 
 Route::middleware('auth')->group(function(){
     Route::get('/dashboard',[HomeController::class,'index'])->name('dashboard');
-    Route::get('/produits',[ProductController::class,'index'])->name('products');
-    Route::get('/categories',[CategorieController::class,'index'])->name('categories');
+    Route::get('/taux',[TauxController::class,'index'])->name('taux');
+});
+
+Route::middleware(['gerant','auth'])->group(function(){
     Route::get('/tables',[TableController::class,'index'])->name('tables');
     Route::get('/precommandes',[PrecommandeController::class,'index'])->name('commandes');
     Route::get('/commande/{id}',[CommandeController::class,'new'])->name('new_commande');
-    Route::get('/depenses',[DepenseController::class,'index'])->name('depenses');
+    Route::get('/facture/{id}',[HomeController::class,'facture'])->name('facture');
+    Route::get('/produit-detail/{id}',[ProductController::class,'show'])->name('product-detail');
+});
+
+Route::middleware(['admin','auth'])->group(function(){
+    Route::get('/produits',[ProductController::class,'index'])->name('products');
+    Route::get('/categories',[CategorieController::class,'index'])->name('categories');
+
 
     Route::get("/rapports",[RapportController::class,'index'])->name('rapports');
     Route::get("/dailyRapport",[RapportController::class,'daily'])->name('daily-rapport');
@@ -56,10 +66,10 @@ Route::middleware('auth')->group(function(){
     Route::get('/weeklyStock',[StockController::class,'weekly'])->name("weekly-stock");
     Route::get('/monthStock',[StockController::class,'monthly'])->name("monthly-stock");
     
-    Route::get('/facture/{id}',[HomeController::class,'facture'])->name('facture');
 
+    Route::get('/depenses',[DepenseController::class,'index'])->name('depenses');
     Route::get('/roles',[RoleController::class,'index'])->name('roles');
     Route::get('/users',[UserController::class,'index'])->name('users');
-});
 
+});
 require __DIR__.'/auth.php';
