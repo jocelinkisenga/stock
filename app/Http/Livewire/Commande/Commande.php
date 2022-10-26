@@ -18,11 +18,11 @@ class Commande extends Component
         $this->quantity_commande;
     }
 
-    public function ajouter($produitId, $commandeId)
+    public function ajouter( $commandeId)
     {
         $commande = new  CommandeRepositorie;
         $this->precommande_id = $commandeId;
-        $this->produit_id = $produitId;
+        
 
         $produit = $commande->produit_by_id($this->produit_id);
 

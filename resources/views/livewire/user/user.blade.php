@@ -151,6 +151,9 @@
                                                     <th>
                                                        sexe
                                                     </th>
+                                                                                                        <th>
+                                                       detail
+                                                    </th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -170,11 +173,15 @@
                                                     <td>
                                                         {{$item->role}}
                                                     </td>
-
+                                                    
 
                                                     <td>
                                                         {{$item->sexe}}
                                                     </td>
+                                                    <td>
+                                                       <a class="btn btn-success btn-sm" href="{{route('user-detail',['id'=>$item->id])}}">voir plus</a>
+                                                    </td>
+
                                                 </tr>
 
 

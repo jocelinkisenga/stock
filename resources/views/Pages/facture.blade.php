@@ -1,5 +1,27 @@
-@extends('layouts.app')
-@section('content')
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+
+        <title>{{ config('app.name', 'Laravel') }}</title>
+        <link rel="stylesheet" href="{{asset('feather/feather.css')}}">
+        <link rel="stylesheet" href="{{asset('ti-icons/css/themify-icons.css')}}">
+        <link rel="stylesheet" href="{{asset('css/vendor.bundle.base.css')}}">
+      
+        <script src="{{asset('assets/js/jquery.js')}}"></script>
+        
+        <!-- endinject -->
+        <!-- Plugin css for this page -->
+        <!-- End plugin css for this page -->
+        <!-- inject:css -->
+        <link rel="stylesheet" href="{{asset('css/vertical-layout-light/style.css')}}">
+        @livewireStyles
+    </head>
+    <body class="font-sans antialiased">
+        <div class="min-h-screen bg-gray-100">
+            @include('layouts.navigation')
     <?php global $item_total; ?>
     <div class="main-panel" id="page">
         <div class="content-wrapper">
@@ -9,8 +31,8 @@
                     <button type="" class="float-right"><i class="far fa-credit-card"></i>
                        
                     </button>
-                    <button type="button" id="print" class="float-right btn btn-primary" style="margin-right: 5px;">
-                        <i class="fas fa-download"></i> imprimer la facture
+                    <button  onclick="printDiv()" class="float-right btn btn-primary" style="margin-right: 5px;">
+                       imprimer la facture
                     </button>
                 </div>
             </div>
@@ -25,7 +47,7 @@
                                     Date: <?= date('Y/m/d') ?>
                                 </div>
                             </div>
-                            <div class="card-body">
+                            <div class="card-body" id="elem">
                                 <div class="row mb-4">
                                 </div>
                                 <div class="table-responsive-sm">
@@ -68,29 +90,27 @@
     </div>
 
     <script>
-        $('#print').on("click", function() {
-            $("#myPrintable").printThis({
-                debug: false, // show the iframe for debugging
-                importCSS: true, // import parent page css
-                importStyle: true, // import style tags
-                printContainer: true, // print outer container/$.selector
-                loadCSS: "", // path to additional css file - use an array [] for multiple
-                pageTitle: "", // add title to print page
-                removeInline: false, // remove inline styles from print elements
-                removeInlineSelector: "*", // custom selectors to filter inline styles. removeInline must be true
-                printDelay: 333, // variable print delay
-                header: null, // prefix to html
-                footer: null, // postfix to html
-                base: false, // preserve the BASE tag or accept a string for the URL
-                formValues: true, // preserve input/form values
-                canvas: false, // copy canvas content
-                doctypeString: '...', // enter a different doctype for older markup
-                removeScripts: false, // remove script tags from print content
-                copyTagClasses: false, // copy classes from the html & body tag
-                beforePrintEvent: null, // function for printEvent in iframe
-                beforePrint: null, // function called before iframe is filled
-                afterPrint: null // function called before iframe is removed
-            });
-        });
+		function printDiv(){
+            var mywindow = window.open();
+var content = document.getElementById(elem).innerHTML;
+mywindow.document.write(content);
+mywindow.print();
     </script>
-@endsection
+  
+  @livewireScripts
+  <script src="{{asset('js/vendor.bundle.base.js')}}"></script>
+   <script src="{{asset('js/off-canvas.js')}}"></script>
+   <script src="{{asset('js/hoverable-collapse.js')}}"></script>
+   <script src="{{asset('js/template.js')}}"></script>
+   <script src="{{asset('js/printThis.js')}}"></script>
+   <script src="{{asset('js/settings.js')}}"></script>
+   <script src="{{asset('js/todolist.js')}}"></script>
+   <script src="{{asset('js/dashboard.js')}}"></script>
+   <script src="{{asset('js/jquery.js')}}"></script>
+       <script src="{{asset('js/html2pdf.bundle.min.js')}}"></script>
+   
+
+   <script src="{{asset('js/Chart.roundedBarCharts.js')}}"></script>
+</body>
+</html>
+

@@ -70,6 +70,7 @@ Route::middleware(['admin','auth'])->group(function(){
     Route::get('/depenses',[DepenseController::class,'index'])->name('depenses');
     Route::get('/roles',[RoleController::class,'index'])->name('roles');
     Route::get('/users',[UserController::class,'index'])->name('users');
+    Route::get('/users-detail/{id}',[UserController::class,'show'])->name('user-detail');
 
 });
 require __DIR__.'/auth.php';

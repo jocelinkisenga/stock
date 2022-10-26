@@ -5,8 +5,9 @@
             <div class="col-lg-6 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Produits</h4><input type="text" id="myInput" class=""
-                            onkeyup="myFunction()" placeholder="Search for names..">
+                       <h5 class="card-title text-uppercase">Ajout des produits à la commande</h5>
+                        {{--  <input type="text" id="myInput" class=""
+                            onkeyup="myFunction()" placeholder="Search for names.."> --}}
                         <p class="card-description">
                             @if (session('message'))
                             <p class="alert alert-danger">{{session('message')}}</p>
@@ -16,13 +17,32 @@
                             <table class="table" id="myTable">
                                 <thead>
                                     <tr>
-                                        <th>nom</th>
-                                        <th>prix</th>
-                                        <th>action</th>
+                                        <th class="text-green">selectionner un produit</th>
+                                        
+                                        <th>Quantité</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($products as $index => $item)
+                                    <form>
+                                    <tr>
+                                        <td>
+                                            <select wire:model="produit_id" id="" class="form-control">
+                                                <option selected>selectioner un produit</option>
+                                                @foreach ($products as $index => $item)
+                                                <option value="{{$item->id }}">{{$item->name}}</option>
+                                                @endforeach
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input type="number"  value="1" autocomplete="off"
+                                            wire:model="quantity_commande" autocomplete="off"/>
+                                        <input type="submit" value="ajouter"
+                                            wire:click.prevent="ajouter( {{ $commande_id }})"
+                                            class="btn btn-success btn-sm" />
+                                        </td>
+                                    </tr>
+                                </form>
+                                    {{-- @foreach ($products as $index => $item)
                                         
 
                                             <tr>
@@ -40,7 +60,7 @@
                                                     </td>
                                             </tr>
                                         
-                                    @endforeach
+                                    @endforeach --}}
 
                                 </tbody>
                             </table>
